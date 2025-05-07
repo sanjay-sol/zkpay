@@ -1,0 +1,15 @@
+node_modules
+dist
+
+package-lock.json
+yarn-error.log
+yarn.lock
+npm-debug.log*
+.DS_Store
+.vscode
+.env
+.env.local
+.env.development.local
+/target
+
+target
