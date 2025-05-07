@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZK Payment Proof</title>
+  </head>
+  <body class="p-4 font-sans">
+    <h1 class="text-2xl mb-4">ZK Payment Proof Generator</h1>
+
+    <div class="mb-4">
+      <button id="chooseFileBtn" class="p-2 bg-gray-300 rounded mr-2">Choose Certificate File</button>
+      <button id="loadSampleBtn" class="p-2 bg-blue-500 text-white rounded">Load Sample Certificate</button>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 max-w-xl">
+      <div>
+        <label class="block font-medium">Msg Hash:</label>
+        <input type="text" id="msgHash" class="w-full p-2 border rounded" readonly />
+      </div>
+      <div>
+        <label class="block font-medium">Signature:</label>
+        <input type="text" id="signature" class="w-full p-2 border rounded" readonly />
+      </div>
+      <div>
+        <label class="block font-medium">PubKey X:</label>
+        <input type="text" id="pubkeyX" class="w-full p-2 border rounded" readonly />
+      </div>
+      <div>
+        <label class="block font-medium">PubKey Y:</label>
+        <input type="text" id="pubkeyY" class="w-full p-2 border rounded" readonly />
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button id="generateProofBtn" class="p-2 bg-green-500 text-white rounded mr-2">Generate Proof</button>
+      <button id="verifyProofBtn" class="p-2 bg-purple-500 text-white rounded">Verify Proof</button>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
