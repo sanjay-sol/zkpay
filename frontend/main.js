@@ -5,6 +5,7 @@ import circuit from "../target/zkpay.json";
 let witness = null;
 let backend = null;
 let proof = null;
+let publicInputs = null;
 
 // Sample data (same as you provided)
 const sampleData = {
@@ -67,10 +68,40 @@ document
       console.log("Please load a certificate first.");
       return;
     }
-    proof = await backend.generateProof(witness);
+    console.log("Generating proof...");
+    ({ proof, publicInputs } = await backend.generateProof(witness));
     console.log("Proof generated:", proof);
   });
 
-document.getElementById("verifyProofBtn").addEventListener("click", () => {
-  console.log("Proof verified (placeholder):", proof);
-});
+document
+  .getElementById("verifyProofBtn")
+  .addEventListener("click", async () => {
+    if (!proof) {
+      console.log("No proof to verify.");
+      return;
+    }
+
+    try {
+      const proofBase64 = btoa(String.fromCharCode(...new Uint8Array(proof)));
+      const publicInputsBase64 = btoa(
+        String.fromCharCode(...new Uint8Array(publicInputs))
+      );
+
+      // Send these as part of the JSON body
+      const response = await fetch("http://localhost:3000/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          proof: proofBase64,
+          publicInputs: publicInputsBase64,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Backend verification response:", data);
+    } catch (err) {
+      console.error("Error verifying proof with backend:", err);
+    }
+  });
