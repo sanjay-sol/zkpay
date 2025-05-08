@@ -71,7 +71,33 @@ const sampleData = {
   ],
 };
 
+function setStatusLoading(statusId) {
+  const statusDiv = document.getElementById(statusId);
+  statusDiv.innerHTML = `
+    <svg class="animate-spin h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+  `;
+}
+
+function setStatusDone(statusId) {
+  const statusDiv = document.getElementById(statusId);
+  statusDiv.innerHTML = `
+    <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+  `;
+}
+
+function clearStatus(statusId) {
+  const statusDiv = document.getElementById(statusId);
+  statusDiv.innerHTML = "";
+}
 document.getElementById("loadSampleBtn").addEventListener("click", async () => {
+  setStatusLoading("loadSampleStatus");
+
+  // existing logic...
   document.getElementById("payer").value = JSON.stringify(sampleInput.payer);
   document.getElementById("rec").value = JSON.stringify(sampleInput.receiver);
   document.getElementById("amount").value = JSON.stringify(sampleInput.amount);
@@ -100,25 +126,35 @@ document.getElementById("loadSampleBtn").addEventListener("click", async () => {
   backend = new UltraHonkBackend(circuit.bytecode);
 
   console.log("Witness ready");
+
+  setStatusDone("loadSampleStatus");
 });
 
 document
   .getElementById("generateProofBtn")
   .addEventListener("click", async () => {
+    setStatusLoading("generateProofStatus");
+
     if (!witness || !backend) {
       console.log("Please load a certificate first.");
+      clearStatus("generateProofStatus");
       return;
     }
     console.log("Generating proof...");
     ({ proof, publicInputs } = await backend.generateProof(witness));
     console.log("Proof generated:", proof);
+
+    setStatusDone("generateProofStatus");
   });
 
 document
   .getElementById("verifyProofBtn")
   .addEventListener("click", async () => {
+    setStatusLoading("verifyProofStatus");
+
     if (!proof) {
       console.log("No proof to verify.");
+      clearStatus("verifyProofStatus");
       return;
     }
 
@@ -128,7 +164,6 @@ document
         String.fromCharCode(...new Uint8Array(publicInputs))
       );
 
-      // Send these as part of the JSON body
       const response = await fetch("http://localhost:3000/verify", {
         method: "POST",
         headers: {
@@ -142,7 +177,9 @@ document
 
       const data = await response.json();
       console.log("Backend verification response:", data);
+      setStatusDone("verifyProofStatus");
     } catch (err) {
       console.error("Error verifying proof with backend:", err);
+      clearStatus("verifyProofStatus");
     }
   });

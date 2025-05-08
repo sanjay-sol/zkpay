@@ -1,56 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZK Payment Proof</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="p-4 font-sans">
-    <h1 class="text-2xl mb-4">ZK Payment Proof Generator</h1>
+  <body class="p-4 bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col items-center">
+    <div class="w-full max-w-2xl bg-gray-800 p-4 rounded-2xl shadow-lg">
+      <h1 class="text-2xl font-bold mb-4 text-center text-blue-400">ZK Payment Proof Generator</h1>
 
-    <div class="mb-4">
-      <button id="chooseFileBtn" class="p-2 bg-gray-300 rounded mr-2">Choose Certificate File</button>
-      <button id="loadSampleBtn" class="p-2 bg-blue-500 text-white rounded">Load Sample Certificate</button>
-    </div>
+      <!-- Input Fields 2x2 Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Payer Name:</label>
+          <input type="text" id="payer" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Receiver Name:</label>
+          <input type="text" id="rec" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Amount Paid:</label>
+          <input type="text" id="amount" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Payment Id:</label>
+          <input type="text" id="payment" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+      </div>
 
-    <div class="grid grid-cols-1 gap-4 max-w-xl">
-      <div>
-        <label class="block font-medium">Payer Name:</label>
-        <input type="text" id="payer" class="w-full p-2 border rounded" readonly />
+      <!-- Remaining Fields Single Column -->
+      <div class="grid grid-cols-1 gap-3 mb-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Msg Hash:</label>
+          <input type="text" id="msgHash" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Signature:</label>
+          <input type="text" id="signature" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">PubKey X:</label>
+          <input type="text" id="pubkeyX" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">PubKey Y:</label>
+          <input type="text" id="pubkeyY" class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm" readonly />
+        </div>
       </div>
-      <div>
-        <label class="block font-medium">Receiver Name:</label>
-        <input type="text" id="rec" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">Amount Paid</label>
-        <input type="text" id="amount" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">Payment Id</label>
-        <input type="text" id="payment" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">Msg Hash:</label>
-        <input type="text" id="msgHash" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">Signature:</label>
-        <input type="text" id="signature" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">PubKey X:</label>
-        <input type="text" id="pubkeyX" class="w-full p-2 border rounded" readonly />
-      </div>
-      <div>
-        <label class="block font-medium">PubKey Y:</label>
-        <input type="text" id="pubkeyY" class="w-full p-2 border rounded" readonly />
-      </div>
-    </div>
 
-    <div class="mt-4">
-      <button id="generateProofBtn" class="p-2 bg-green-500 text-white rounded mr-2">Generate Proof</button>
-      <button id="verifyProofBtn" class="p-2 bg-purple-500 text-white rounded">Verify Proof</button>
+      <!-- Buttons + Status in 2x2 Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        <!-- Button 1 -->
+        <div class="flex items-center">
+          <button id="chooseFileBtn" class="flex-1 p-2 bg-gray-600 text-gray-200 rounded-lg hover:bg-gray-500 text-sm transition">Choose Certificate File</button>
+          <div id="chooseFileStatus" class="w-5 h-5 ml-2"></div>
+        </div>
+
+        <!-- Button 2 -->
+        <div class="flex items-center">
+          <button id="loadSampleBtn" class="flex-1 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 text-sm transition">Load & Parse Sample Certificate</button>
+          <div id="loadSampleStatus" class="w-5 h-5 ml-2"></div>
+        </div>
+
+        <!-- Button 3 -->
+        <div class="flex items-center">
+          <button id="generateProofBtn" class="flex-1 p-2 bg-green-600 text-white rounded-lg hover:bg-green-500 text-sm transition">Generate Proof</button>
+          <div id="generateProofStatus" class="w-5 h-5 ml-2"></div>
+        </div>
+
+        <!-- Button 4 -->
+        <div class="flex items-center">
+          <button id="verifyProofBtn" class="flex-1 p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-500 text-sm transition">Verify Proof</button>
+          <div id="verifyProofStatus" class="w-5 h-5 ml-2"></div>
+        </div>
+      </div>
+
+      <!-- New Textarea + Parse Button -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1">Paste Certificate:</label>
+        <textarea id="certificateInput" rows="4" placeholder="Paste certificate here..." class="w-full p-2 border rounded-lg bg-gray-700 text-gray-200 text-sm placeholder-gray-400"></textarea>
+      </div>
+      <div class="flex items-center">
+        <button id="parseCertificateBtn" class="flex-1 p-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 text-sm transition">Parse with Custom ASN.1 Parser</button>
+        <div id="parseStatus" class="w-5 h-5 ml-2"></div>
+      </div>
     </div>
 
     <script type="module" src="/main.js"></script>
