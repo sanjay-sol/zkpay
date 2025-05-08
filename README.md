@@ -8,7 +8,7 @@ A Zero-Knowledge (ZK) payment proof system built with Noir, demonstrating privac
 
 - [ZK Payment Proof Generator](#zk-payment-proof-generator)
   - [📑 Table of Contents](#-table-of-contents)
-  - [Main Proposal](#main-proposal)
+  - [Proposal](#proposal)
   - [What is the Problem?](#what-is-the-problem)
   - [What is Our Solution?](#what-is-our-solution)
   - [Workflow diagram / Architecture](#workflow-diagram--architecture)
@@ -23,8 +23,9 @@ A Zero-Knowledge (ZK) payment proof system built with Noir, demonstrating privac
 
 ---
 
-##  Main Proposal
+##  Proposal
 
+Along with this project our team also primarily proposes **implementing ASN.1 parsing capabilities into the Noir ecosystem** to handle real-world certificate formats (e.g., DER-encoded certificates from payment gateways).
 
 🔗 **ASN.1 Parser Spec Sheet:**  
 [ASN.1 Parser Proposal and Specification Sheet](https://hackmd.io/@sanjay-sol/SJlxosdexl)
@@ -64,6 +65,7 @@ Example use cases:
 
 ## Workflow diagram / Architecture
 
+<img width="1275" alt="Screenshot 2025-05-09 at 12 01 42 AM" src="https://github.com/user-attachments/assets/96456d85-3641-4df5-9aeb-4400f055c24a" />
 
 
 ## What Noir is Missing
