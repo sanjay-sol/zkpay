@@ -12,8 +12,7 @@ const pubKey = secp256k1.publicKeyCreate(privKey, false);
 const pubKeyX = pubKey.slice(1, 33); // 32 bytes
 const pubKeyY = pubKey.slice(33, 65); // 32 bytes
 
-// 3. Message and hash
-const message = "Hello Noir + ECDSA!";
+const message = "GeneralElectric|Ferguson|166000|SRN9375802855|";
 console.log("message: [");
 for (const b of Buffer.from(message, "utf8")) {
   process.stdout.write(`0x${b.toString(16).padStart(2, "0")}, `);
