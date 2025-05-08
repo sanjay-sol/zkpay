@@ -1,6 +1,6 @@
 import { UltraHonkBackend } from "@aztec/bb.js";
 import { Noir } from "@noir-lang/noir_js";
-import circuit from "../target/zkpay.json";
+import circuit from "./zkpay.json";
 
 let witness = null;
 let backend = null;
@@ -163,7 +163,7 @@ document
         String.fromCharCode(...new Uint8Array(publicInputs))
       );
 
-      const response = await fetch("http://localhost:3000/verify", {
+      const response = await fetch("https://zkpay-noir.onrender.com/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
