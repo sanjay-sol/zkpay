@@ -1,7 +1,6 @@
 const https = require("https");
 const crypto = require("crypto");
 
-// ----- YOUR INPUT DATA -----
 const certURL =
   "https://api.sandbox.paypal.com/v1/notifications/certs/CERT-360caa42-fca2a594-a5cafa77";
 const transmissionId = "103e3700-8b0c-11e6-8695-6b62a8a99ac4";
@@ -11,7 +10,6 @@ const transmissionTime = "2016-10-05T14:57:40Z";
 const webhookId = "3TR748995U920805P";
 const eventBody =
   '{"id":"WH-82L71649W50323023-5WC64761VS637831A","event_version":"1.0","create_time":"2016-10-05T14:57:40Z","resource_type":"sale","event_type":"PAYMENT.SALE.COMPLETED","summary":"Payment completed for $ 6.01 USD","resource":{"id":"8RS6210148826604N","state":"completed","amount":{"total":"6.01","currency":"USD","details":{"subtotal":"3.00","tax":"0.01","shipping":"1.00","handling_fee":"2.00","shipping_discount":"3.00"}},"payment_mode":"INSTANT_TRANSFER","protection_eligibility":"ELIGIBLE","protection_eligibility_type":"ITEM_NOT_RECEIVED_ELIGIBLE,UNAUTHORIZED_PAYMENT_ELIGIBLE","transaction_fee":{"value":"0.47","currency":"USD"},"invoice_number":"","custom":"Hello World!","parent_payment":"PAY-11X29866PC6848407K72RIQA","create_time":"2016-10-05T14:57:18Z","update_time":"2016-10-05T14:57:26Z","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/sale/8RS6210148826604N","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/payments/sale/8RS6210148826604N/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-11X29866PC6848407K72RIQA","rel":"parent_payment","method":"GET"}]},"links":[{"href":"https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-82L71649W50323023-5WC64761VS637831A","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-82L71649W50323023-5WC64761VS637831A/resend","rel":"resend","method":"POST"}]}';
-// ----------------------------
 
 const fetchCert = (url) => {
   return new Promise((resolve, reject) => {
@@ -39,16 +37,12 @@ const pemToModExp = (pem) => {
 
 (async () => {
   try {
-    // 1️⃣ Fetch certificate
     const certPem = await fetchCert(certURL);
 
-    // 2️⃣ Extract modulus & exponent
     const { modulus, exponent } = pemToModExp(certPem);
 
-    // 3️⃣ Base64-decode signature
     const signatureBytes = Buffer.from(transmissionSignature, "base64");
 
-    // 4️⃣ Build msg string per PayPal spec
     const bodyHash = crypto
       .createHash("sha256")
       .update(eventBody, "utf8")
@@ -59,7 +53,6 @@ const pemToModExp = (pem) => {
       .update(expectedSigString, "utf8")
       .digest();
 
-    // 🖨️ Print Rust-style arrays
     console.log("\nlet modulus: [u8; 256] = [");
     console.log(
       [...modulus].map((b) => `0x${b.toString(16).padStart(2, "0")}`).join(", ")
