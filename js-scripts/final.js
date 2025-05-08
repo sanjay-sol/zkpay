@@ -14,6 +14,11 @@ const pubKeyY = pubKey.slice(33, 65); // 32 bytes
 
 // 3. Message and hash
 const message = "Hello Noir + ECDSA!";
+console.log("message: [");
+for (const b of Buffer.from(message, "utf8")) {
+  process.stdout.write(`0x${b.toString(16).padStart(2, "0")}, `);
+}
+console.log("]\n");
 const msgHash = crypto.createHash("sha256").update(message).digest(); // 32 bytes
 
 // 4. Sign the message hash
