@@ -5,19 +5,17 @@ const { UltraHonkBackend } = require("@aztec/bb.js");
 const fs = require("fs");
 const path = require("path");
 
-// Read circuit JSON from the same directory (adjust the path if needed)
 const circuitPath = path.join(__dirname, "zkpay.json");
 const circuit = JSON.parse(fs.readFileSync(circuitPath, "utf-8"));
 
 const app = express();
-const port = 3000; // or any port you prefer
+const port = 3000; 
 
 app.use(cors());
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-// Endpoint to verify the proof
 app.post("/verify", async (req, res) => {
   try {
     const { proof, publicInputs } = req.body;

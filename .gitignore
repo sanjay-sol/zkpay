@@ -13,3 +13,8 @@ npm-debug.log*
 /target
 
 target
+
+js-scripts/once.js
+js-scripts/once2.js
+js-scripts/test.js
+js-scripts/final.js
