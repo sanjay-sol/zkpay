@@ -39,8 +39,9 @@ Along with this project our team also primarily proposes **implementing ASN.1 pa
 
 [Slides Explaination Video](https://www.loom.com/share/debabdcff96a414bad885b436b9e1e18)
 
-📦 **Repository:**  
-[https://github.com/sanjay-sol/zkpay](https://github.com/sanjay-sol/zkpay)
+📦 **Presentation Slides:**  
+[Canva Slides](https://www.canva.com/design/DAGm3jHg-c0/1CVK3Mez4tIek1kQLKYm7g/edit?utm_content=DAGm3jHg-c0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 
 ---
 
