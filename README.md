@@ -31,13 +31,14 @@ Along with this project our team also primarily proposes **implementing ASN.1 pa
 [ASN.1 Parser Proposal and Specification Sheet](https://hackmd.io/@sanjay-sol/SJlxosdexl)
 
 🚀 **Live Frontend:**  
-[https://zk-payment-proof.vercel.app](https://zk-payment-proof.vercel.app)
+[https://zkpay-six.vercel.app/](https://zkpay-six.vercel.app/)
 
-🖥  ** Demo Vide:**
-[Loom](https://zk-payment-proof.vercel.app)\
+🖥  ** Demo Videos:**
+[Implementation](https://www.loom.com/share/55eb03a6b08c44bfb8c20566ac64b052)
+[Slides Explaination](https://www.loom.com/share/debabdcff96a414bad885b436b9e1e18)
 
 📦 **Repository:**  
-[https://github.com/sanjay-sol/zkpay](https://github.com/yourusername/zk-payment-proof)
+[https://github.com/sanjay-sol/zkpay](https://github.com/sanjay-sol/zkpay)
 
 ---
 
