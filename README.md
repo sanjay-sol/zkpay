@@ -1,4 +1,4 @@
-# ZK Payment Proof Generator
+# ZK Payment Proof Generator & ASN.1 Parser ( Grant Proposal )
 
 A Zero-Knowledge (ZK) payment proof system built with Noir, demonstrating privacy-preserving verification of payments using ASN.1 encoded certificates.
 
@@ -6,7 +6,7 @@ A Zero-Knowledge (ZK) payment proof system built with Noir, demonstrating privac
 
 ## 📑 Table of Contents
 
-- [ZK Payment Proof Generator](#zk-payment-proof-generator)
+- [ZK Payment Proof Generator \& ASN.1 Parser ( Grant Proposal )](#zk-payment-proof-generator--asn1-parser--grant-proposal-)
   - [📑 Table of Contents](#-table-of-contents)
   - [Proposal](#proposal)
   - [What is the Problem?](#what-is-the-problem)
@@ -27,7 +27,7 @@ A Zero-Knowledge (ZK) payment proof system built with Noir, demonstrating privac
 
 Along with this project our team also primarily proposes **implementing ASN.1 parsing capabilities into the Noir ecosystem** to handle real-world certificate formats (e.g., DER-encoded certificates from payment gateways).
 
-🔗 **ASN.1 Parser Spec Sheet:**  
+🔗 **ASN.1 Parser full Spec Sheet for Grant proposal:**  
 [ASN.1 Parser Proposal and Specification Sheet](https://hackmd.io/@sanjay-sol/SJlxosdexl)
 
 🚀 **Live Frontend:**  
