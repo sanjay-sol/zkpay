@@ -14,7 +14,6 @@ fn hex_char_to_nibble(c: u8) -> u8 {
     val
 }
 
-
 fn hex_decode(hex: [u8; 4]) -> [u8; 2] {
     let mut out: [u8; 2] = [0; 2];
 
@@ -23,7 +22,6 @@ fn hex_decode(hex: [u8; 4]) -> [u8; 2] {
         let low = hex_char_to_nibble(hex[2 * i + 1]);
         out[i] = high * 16 + low;
     }
-
     out
 }
 
