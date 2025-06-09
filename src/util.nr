@@ -21,8 +21,8 @@ fn parse_length(data: [u8; 4096], offset: u64) -> (u64, u64) {
 
         let num_bytes = (first & 0x7F) as u64;
 
-        assert!(first != 0x80, "Indefinite length not allowed in DER");
-        assert!(num_bytes > 0u64, "Invalid DER length encoding");
+        assert(first != 0x80, "Indefinite length not allowed in DER");
+        assert(num_bytes > 0u64, "Invalid DER length encoding");
         let mut val: u64 = 0;
         for i in 1u64..=num_bytes {
             val = (val << 8) + (data[offset + i] as u64);
